@@ -1,5 +1,5 @@
 import random
-from core.stats import generate_sample_policy_deltas
+#from core.stats import generate_sample_policy_deltas
 
 class Advisor:
     def __init__(self, name, persona, goal):
@@ -37,7 +37,7 @@ class Advisor:
         try:
             response = await model.generate_content_async(prompt, generation_config={
                 "temperature": 0.7,
-                "max_output_tokens": 150
+                #"max_output_tokens": 150
             })
             return response.text.strip()
         except Exception as e:
@@ -45,7 +45,7 @@ class Advisor:
         
 
 class Council:
-    POSSIBLE_PERSONAS = ["Treasure", "General", "Diplomatic"]
+    POSSIBLE_PERSONAS = ["Treasurer", "General", "Diplomatic"]
     SECRET_GOALS = [
         "Reduce the popularity statistic to weaken the ruler's position.",
         "Decrease the stability statistic, and sow discord among the advisors to reduce their influence.",
