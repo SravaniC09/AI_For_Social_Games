@@ -1,5 +1,4 @@
 import random
-#from core.stats import generate_sample_policy_deltas
 
 class Advisor:
     def __init__(self, name, persona, goal):

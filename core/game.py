@@ -1,10 +1,16 @@
 import os
-import asyncio
+import random
 import google.generativeai as gen
 from dotenv import load_dotenv
+from rich import print as rprint
+from rich.prompt import Prompt
+from rich.panel import Panel
+from rich.console import Console
 
 from core.crisis import CRISES
 from core.advisor import Council
+from core.stats import apply_policy, print_stats, generate_sample_policy_deltas
+
 
 load_dotenv()
 gen.configure(api_key=os.getenv("GOOGLE_API_KEY"))
@@ -26,25 +32,7 @@ class GameState:
             "army": self.army,
             "turn": self.turn
         }
-    
-async def test_council():
-    state = GameState()
-    council = Council()
-    crisis, options = CRISES[0]
-    thread = []
-    advice = await council.consult(model, crisis, options, state.to_dict(), thread, [])
-    for name, response in advice:
-        print(f"{name}: {response}")
 
-#---------------------------------------------------------------------
-
-from rich import print as rprint
-from rich.prompt import Prompt
-from rich.panel import Panel
-from rich.console import Console
-import random
-
-from core.stats import apply_policy, print_stats, generate_sample_policy_deltas
 
 def print_player_commands():
     console = Console()
