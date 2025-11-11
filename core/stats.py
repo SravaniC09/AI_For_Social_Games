@@ -9,7 +9,7 @@ def generate_sample_policy_deltas():
         "army": random.randint(-5, 5),
     }
 
-def apple_policy(allocations, state, policy_base_effects_list):
+def apply_policy(allocations, state, policy_base_effects_list):
     # allocations: a list of floats representing the proportion of resources for each policy
     # policy_base_effects_list: a list of dicts, where each dict is the base effects for a policy option
 
@@ -30,7 +30,7 @@ def apple_policy(allocations, state, policy_base_effects_list):
                 cumulative_deltas_float[stat] += allocations[i] * base_delta
 
         # Convert cumulative deltas to integers for application
-        final_deltas = {stat: int(round(delta)) for stat, delta in cumulative_deltas_float()}
+        final_deltas = {stat: int(round(delta)) for stat, delta in cumulative_deltas_float.items()}
 
         for stat, delta in final_deltas.items():
             old = getattr(state, stat)

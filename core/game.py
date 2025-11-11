@@ -38,9 +38,9 @@ def print_player_commands():
     console = Console()
     console.print(Panel.fit(
         "[bold yellow]Player Commands[/bold yellow]\n\n"
-        "[cyan]ask [advisor name] [message][/cyan]  - Ask a single advisor something\n"
-        "[cyan]all [message][/cyan]               - Broadcast a message to all advisors\n"
-        "[cyan]!choose [alloc_A] [alloc_B] [alloc_C][cyan/] - Lock in policy allocations (e.g., !choose 50 30 20)\n"
+        "[cyan]ask [advisor name] [message][/cyan]                      - Ask a single advisor something\n"
+        "[cyan]all [message][/cyan]                        - Broadcast a message to all advisors\n"
+        "[cyan]!choose [alloc_A] [alloc_B] [alloc_C][/cyan]            - Lock in policy allocations (e.g., !choose 50 30 20)\n"
         "[cyan]log[/cyan]                         - Show the conversation history\n"
         "[cyan]quit[/cyan]                        - End the game immediately\n\n"
         "[dim italic]Example: !choose 60 20 20 (allocates 60% to A, 20% to B, 20% to C)[/dim italic]",
@@ -76,7 +76,7 @@ async def game_loop():
         for i, option in enumerate(options, start=65):
             rprint(f"  [bold]{chr(i)}[/]: {option}")
 
-        rprint("\n[italic]Your advisors are deliverating...[/]\n")
+        rprint("\n[italic]Your advisors are deliberating...[/]\n")
 
         # get each advisor's response
         advice = await council.consult(model, crisis_text, options, state.to_dict(), thread, current_turn_policy_base_effects)
@@ -115,7 +115,7 @@ async def game_loop():
                 if not found:
                     rprint(f"[red]Advisor '{advisor_name}' not found.[/]")
 
-            elif command.startswish("all"):
+            elif command.startswith("all"):
                 msg = command[4:]
                 thread.append(f"Player to all: {msg}")
                 for advisor in council.advisors:
